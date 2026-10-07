@@ -1,0 +1,1782 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ALFANET | Desarrollo Web Profesional</title>
+  
+  <!-- FUENTES -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-dark: #0b0f19;
+      --bg-card: #131a29;
+      --bg-card-hover: #1c263b;
+      --accent-cyan: #00f2fe;
+      --accent-blue: #4facfe;
+      --accent-green: #25d366;
+      --text-main: #f0f4f8;
+      --text-muted: #94a3b8;
+      --border: rgba(255, 255, 255, 0.08);
+      --danger: #ff4b4b;
+      --glow: 0 0 20px rgba(0, 242, 254, 0.25);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* HEADER & NAV */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(11, 15, 25, 0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.5rem;
+    }
+
+    .logo-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .logo-img {
+      width: 45px;
+      height: 45px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 2px solid var(--accent-cyan);
+    }
+
+    .brand-name {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: #ffffff;
+    }
+
+    /* DROPDOWN MENU */
+    .menu-container {
+      position: relative;
+    }
+
+    .menu-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s;
+    }
+
+    .menu-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--accent-cyan);
+      box-shadow: var(--glow);
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 120%;
+      width: 320px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+      padding: 1rem;
+      z-index: 1001;
+    }
+
+    .dropdown-content.show {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .menu-item {
+      display: block;
+      padding: 0.8rem;
+      color: var(--text-main);
+      text-decoration: none;
+      border-radius: 8px;
+      margin-bottom: 0.5rem;
+      transition: background 0.2s;
+    }
+
+    .menu-item:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .menu-item-title {
+      font-weight: 700;
+      color: var(--accent-cyan);
+      display: block;
+      font-size: 0.95rem;
+    }
+
+    .menu-item-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* HERO SECTION */
+    .hero {
+      max-width: 1200px;
+      margin: 4rem auto;
+      padding: 0 1.5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      background: rgba(0, 242, 254, 0.1);
+      color: var(--accent-cyan);
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      border: 1px solid rgba(0, 242, 254, 0.2);
+    }
+
+    .hero-title {
+      font-size: 2.8rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-title span {
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-desc {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--accent-green);
+      color: #000;
+      font-weight: 700;
+      padding: 1rem 2rem;
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: 1.1rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 10px 20px rgba(37, 211, 102, 0.2);
+    }
+
+    .hero-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 30px rgba(37, 211, 102, 0.4);
+    }
+
+    .hero-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 2.5rem;
+      position: relative;
+      box-shadow: var(--glow);
+    }
+
+    .feature-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      font-size: 1rem;
+    }
+
+    .feature-icon {
+      color: var(--accent-cyan);
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    /* PROCESS SECTION */
+    .section {
+      max-width: 1200px;
+      margin: 6rem auto;
+      padding: 0 1.5rem;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin-bottom: 3rem;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .step-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      text-align: center;
+      position: relative;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+
+    .step-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent-cyan);
+    }
+
+    .step-number {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 3rem;
+      font-weight: 900;
+      color: rgba(255, 255, 255, 0.05);
+      position: absolute;
+      top: 15px;
+      right: 20px;
+    }
+
+    .step-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin: 1rem 0 0.5rem 0;
+      color: var(--accent-cyan);
+    }
+
+    .step-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* PORTFOLIO SHOWCASE */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .portfolio-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .portfolio-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--glow);
+    }
+
+    .portfolio-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      background: #1e293b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+    }
+
+    .portfolio-content {
+      padding: 1.5rem;
+    }
+
+    .portfolio-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .portfolio-desc {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    /* CALCULATOR SECTION */
+    .calculator-container {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 2.5rem;
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      min-height: 250px;
+    }
+
+    .auth-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(19, 26, 41, 0.98);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      padding: 2rem;
+      text-align: center;
+      transition: opacity 0.4s ease, visibility 0.4s;
+    }
+
+    .auth-overlay.unlocked {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .auth-btn {
+      background: var(--accent-cyan);
+      color: #000;
+      font-size: 1.8rem;
+      width: 75px;
+      height: 75px;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 25px rgba(0, 242, 254, 0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .auth-btn:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 35px rgba(0, 242, 254, 0.7);
+    }
+
+    .error-msg {
+      color: var(--danger);
+      font-size: 0.9rem;
+      margin-top: 1rem;
+      display: none;
+      font-weight: 600;
+    }
+
+    .calc-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .calc-row {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      padding: 1rem 1.2rem;
+      border-radius: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .counter-control {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(0,0,0,0.4);
+      padding: 0.4rem 0.8rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+
+    .count-btn {
+      background: rgba(255,255,255,0.1);
+      border: none;
+      color: #fff;
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+
+    .count-btn:hover {
+      background: var(--accent-cyan);
+      color: #000;
+    }
+
+    .calc-toggle {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      user-select: none;
+      width: 100%;
+    }
+
+    .calc-toggle.selected .checkbox-custom {
+      background: var(--accent-cyan);
+      border-color: var(--accent-cyan);
+    }
+
+    .calc-toggle.selected .checkbox-custom::after {
+      content: '✓';
+      color: #000;
+      font-weight: bold;
+      font-size: 13px;
+    }
+
+    .checkbox-custom {
+      width: 22px;
+      height: 22px;
+      border: 2px solid var(--text-muted);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+
+    .calc-summary {
+      background: rgba(0,0,0,0.4);
+      padding: 1.5rem;
+      border-radius: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+      border: 1px solid var(--border);
+    }
+
+    .price-display {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--accent-cyan);
+    }
+
+    /* FAQ ACCORDION */
+    .faq-container {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .faq-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .faq-question {
+      width: 100%;
+      padding: 1.2rem;
+      background: none;
+      border: none;
+      color: var(--text-main);
+      font-weight: 700;
+      font-size: 1rem;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      padding: 0 1.2rem;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+    }
+
+    .faq-item.active .faq-answer {
+      max-height: 200px;
+      padding: 0 1.2rem 1.2rem 1.2rem;
+    }
+
+    /* FLOATING WHATSAPP BUTTON */
+    .float-wa {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background: var(--accent-green);
+      color: white;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+      z-index: 999;
+      transition: transform 0.3s;
+    }
+
+    .float-wa:hover {
+      transform: scale(1.1);
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 3rem 1.5rem;
+      text-align: center;
+      color: var(--text-muted);
+      margin-top: 4rem;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .hero-title {
+        font-size: 2.2rem;
+      }
+      .calc-summary {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header>
+    <div class="nav-container">
+      <a href="#" class="logo-brand">
+        <img src="ALFANET.png" alt="Logo de ALFANET" class="logo-img" onerror="this.src='https://via.placeholder.com/45/00f2fe/000000?text=A'">
+        <span class="brand-name">ALFANET</span>
+      </a>
+
+      <div class="menu-container">
+        <button class="menu-btn" id="mainMenuBtn">
+          Menú Interactivo ▾
+        </button>
+        <div class="dropdown-content" id="dropdownMenu">
+          <a href="#hero" class="menu-item">
+            <span class="menu-item-title">Inicio & Beneficios</span>
+            <span class="menu-item-desc">Descubrí lo que incluye tu sitio web profesional.</span>
+          </a>
+          <a href="#pasos" class="menu-item">
+            <span class="menu-item-title">¿Cómo Funciona?</span>
+            <span class="menu-item-desc">Obtené tu página web en tan solo 3 sencillos pasos.</span>
+          </a>
+          <a href="#proyectos" class="menu-item">
+            <span class="menu-item-title">Trabajos Realizados</span>
+            <span class="menu-item-desc">Echá un vistazo a nuestros diseños.</span>
+          </a>
+          <a href="#cotizador" class="menu-item">
+            <span class="menu-item-title">Cotizador Interactivo</span>
+            <span class="menu-item-desc">Calculá el presupuesto a tu medida.</span>
+          </a>
+          <a href="#faq" class="menu-item">
+            <span class="menu-item-title">Preguntas Frecuentes</span>
+            <span class="menu-item-desc">Resolvé todas tus dudas al instante.</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero" id="hero">
+    <div>
+      <span class="hero-tag">⚡ PÁGINA LISTA EN SOLO 3 DÍAS</span>
+      <h1 class="hero-title">¿Querés potenciar tu negocio? Llevalo al <span>Siguiente Nivel</span></h1>
+      <p class="hero-desc">En ALFANET creamos sitios web modernos, veloces y totalmente optimizados para convertir visitantes en clientes desde celulares y computadoras.</p>
+      <a href="https://wa.me/5493417453769?text=Hola%20ALFANET,%20quiero%20consultar%20por%20mi%20p%C3%A1gina%20web" target="_blank" class="hero-cta">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.51 1.019 3.529l-.696 2.54 2.599-.681c.971.529 2.083.824 3.251.824 3.182 0 5.768-2.586 5.768-5.766 0-3.18-2.586-5.764-5.769-5.764zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793 0-.852.448-1.271.607-1.445.159-.173.346-.217.462-.217.115 0 .231.001.332.006.109.005.253-.041.396.303.145.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.173.086.275.072.376-.043.101-.115.433-.506.549-.679.116-.173.231-.145.39-.087.159.058 1.011.477 1.184.564.173.087.289.13.332.202.043.073.043.419-.101.824z"/></svg>
+        ¡Consultá Gratis Hoy!
+      </a>
+    </div>
+
+    <div class="hero-card">
+      <h3 style="margin-bottom: 1.5rem; font-size: 1.3rem;">¿Qué incluye tu sitio web?</h3>
+      <ul class="feature-list">
+        <li class="feature-item">
+          <span class="feature-icon">✓</span>
+          <span>Diseño 100% Adaptado a Celulares y Computadoras.</span>
+        </li>
+        <li class="feature-item">
+          <span class="feature-icon">✓</span>
+          <span>Botón Directo a tu WhatsApp para consultas al instante.</span>
+        </li>
+        <li class="feature-item">
+          <span class="feature-icon">✓</span>
+          <span>Ubicación Interactiva de Google Maps Integrada.</span>
+        </li>
+        <li class="feature-item">
+          <span class="feature-icon">✓</span>
+          <span>Sitio Seguro (SSL), Rápido y Optimizado para buscadores.</span>
+        </li>
+        <li class="feature-item">
+          <span class="feature-icon">✓</span>
+          <span>Un solo pago accesible sin mensualidades ocultas.</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- PROCESS SECTION -->
+  <section class="section" id="pasos">
+    <h2 class="section-title">Tu Página Web en solo <span style="color: var(--accent-cyan);">3 Pasos</span></h2>
+    <div class="steps-grid">
+      <div class="step-card">
+        <span class="step-number">01</span>
+        <h3 class="step-title">1. Envianos un WhatsApp</h3>
+        <p class="step-desc">Ponete en contacto con nosotros para iniciar la conversación de forma rápida y sin compromiso.</p>
+      </div>
+      <div class="step-card">
+        <span class="step-number">02</span>
+        <h3 class="step-title">2. Compartí tu Idea</h3>
+        <p class="step-desc">Envianos tus imágenes, referencias o simplemente explicanos brevemente qué querés lograr.</p>
+      </div>
+      <div class="step-card">
+        <span class="step-number">03</span>
+        <h3 class="step-title">3. Recibí tu Sitio Listo</h3>
+        <p class="step-desc">En solo 3 días tenés tu página online, probada y lista para atraer nuevos clientes.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN MUESTRA DE PROYECTOS -->
+  <section class="section" id="proyectos">
+    <h2 class="section-title">Proyectos y <span style="color: var(--accent-cyan);">Estilos</span></h2>
+    <div class="portfolio-grid">
+      <div class="portfolio-card">
+        <div class="portfolio-img">💻 Landing Page Comercial</div>
+        <div class="portfolio-content">
+          <h3 class="portfolio-title">Sitio para Negocios y Servicios</h3>
+          <p class="portfolio-desc">Enfocado en captar consultas directas a WhatsApp y presentar servicios con máxima claridad.</p>
+        </div>
+      </div>
+      <div class="portfolio-card">
+        <div class="portfolio-img">📱 Menú & Catálogo Digital</div>
+        <div class="portfolio-content">
+          <h3 class="portfolio-title">Catálogos Interactivos</h3>
+          <p class="portfolio-desc">Ideal para gastronómicos y locales que requieren mostrar productos organizados en celular.</p>
+        </div>
+      </div>
+      <div class="portfolio-card">
+        <div class="portfolio-img">🚀 Sitios Institucionales</div>
+        <div class="portfolio-content">
+          <h3 class="portfolio-title">Presencia Marcaria Profesional</h3>
+          <p class="portfolio-desc">Diseños corporativos, elegantes y optimizados para transmitir confianza absoluta a tus clientes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CALCULATOR SECTION -->
+  <section class="section" id="cotizador">
+    <h2 class="section-title">Cotizador <span style="color: var(--accent-cyan);">Interactivo</span></h2>
+    <div class="calculator-container">
+      
+      <!-- AUTH OVERLAY -->
+      <div class="auth-overlay" id="authOverlay">
+        <button class="auth-btn" id="unlockBtn" title="Ingresar clave">🔒</button>
+        <span class="error-msg" id="errorMsg">⚠️ Clave incorrecta. Intentá de nuevo.</span>
+      </div>
+
+      <p style="color: var(--text-muted); margin-bottom: 1rem;">Personalizá las cantidades y funciones según lo que necesite tu proyecto:</p>
+
+      <div class="calc-list">
+        <!-- PÁGINAS -->
+        <div class="calc-row">
+          <div>
+            <strong style="display:block;">Páginas / Secciones Web</strong>
+            <span style="color: var(--text-muted); font-size: 0.85rem;">$15.000 ARS por página</span>
+          </div>
+          <div class="counter-control">
+            <button class="count-btn" id="btn-pages-minus">-</button>
+            <span id="count-pages" style="font-weight: bold; min-width: 20px; text-align: center;">1</span>
+            <button class="count-btn" id="btn-pages-plus">+</button>
+          </div>
+        </div>
+
+        <!-- IMÁGENES -->
+        <div class="calc-row">
+          <div>
+            <strong style="display:block;">Imágenes / Fotos optimizadas</strong>
+            <span style="color: var(--text-muted); font-size: 0.85rem;">$5.000 ARS por imagen</span>
+          </div>
+          <div class="counter-control">
+            <button class="count-btn" id="btn-images-minus">-</button>
+            <span id="count-images" style="font-weight: bold; min-width: 20px; text-align: center;">3</span>
+            <button class="count-btn" id="btn-images-plus">+</button>
+          </div>
+        </div>
+
+        <!-- FORMULARIO DE CONTACTO -->
+        <div class="calc-row">
+          <div class="calc-toggle selected" id="toggle-form">
+            <div class="checkbox-custom"></div>
+            <div>
+              <strong style="display:block;">Formulario de Contacto / Consultas</strong>
+              <span style="color: var(--text-muted); font-size: 0.85rem;">+$10.000 ARS</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- BOTÓN DE WHATSAPP -->
+        <div class="calc-row">
+          <div class="calc-toggle selected" id="toggle-wa">
+            <div class="checkbox-custom"></div>
+            <div>
+              <strong style="display:block;">Botón Flotante de WhatsApp Directo</strong>
+              <span style="color: var(--text-muted); font-size: 0.85rem;">+$5.000 ARS</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- BOTÓN FLOTANTE DE GOOGLE MAPS DIRECTO -->
+        <div class="calc-row">
+          <div class="calc-toggle selected" id="toggle-maps">
+            <div class="checkbox-custom"></div>
+            <div>
+              <strong style="display:block;">Mapa Interactivo de Google Maps</strong>
+              <span style="color: var(--text-muted); font-size: 0.85rem;">+$5.000 ARS</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="calc-summary">
+        <div>
+          <span style="color: var(--text-muted); font-size: 0.9rem; display: block;">Presupuesto Estimado:</span>
+          <div class="price-display" id="totalPrice">$50.000 ARS</div>
+        </div>
+        <a href="#" id="sendQuoteBtn" target="_blank" class="hero-cta" style="padding: 0.8rem 1.5rem; font-size: 1rem;">
+          Enviar Presupuesto por WhatsApp
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FAQ SECTION -->
+  <section class="section" id="faq">
+    <h2 class="section-title">Preguntas <span style="color: var(--accent-cyan);">Frecuentes</span></h2>
+    <div class="faq-container">
+      <div class="faq-item">
+        <button class="faq-question">
+          <span>¿Hay algún costo mensual o recurrente?</span>
+          <span>+</span>
+        </button>
+        <div class="faq-answer">
+          No. Ofrecemos el desarrollo por un pago único. El dominio y el hosting se abonan anualmente según las necesidades de tu sitio.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          <span>¿Cuánto tiempo tarda realmente en estar lista?</span>
+          <span>+</span>
+        </button>
+        <div class="faq-answer">
+          Una vez que nos envíes la información básica (imágenes, textos o la idea general), entregamos tu sitio funcional en un plazo estimado de 3 días.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          <span>¿Funciona bien en celulares?</span>
+          <span>+</span>
+        </button>
+        <div class="faq-answer">
+          ¡Totalmente! Todos nuestros desarrollos son 100% responsivos y se adaptan a smartphones, tablets y computadoras de escritorio.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FLOATING WHATSAPP BUTTON -->
+  <a href="https://wa.me/5493417453769?text=Hola%20ALFANET,%20tengo%20una%20consulta" target="_blank" class="float-wa" title="Hablar con un asesor">
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.51 1.019 3.529l-.696 2.54 2.599-.681c.971.529 2.083.824 3.251.824 3.182 0 5.768-2.586 5.768-5.766 0-3.18-2.586-5.764-5.769-5.764zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793 0-.852.448-1.271.607-1.445.159-.173.346-.217.462-.217.115 0 .231.001.332.006.109.005.253-.041.396.303.145.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.173.086.275.072.376-.043.101-.115.433-.506.549-.679.116-.173.231-.145.39-.087.159.058 1.011.477 1.184.564.173.087.289.13.332.202.043.073.043.419-.101.824z"/></svg>
+  </a>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2026 ALFANET. Desarrollo Web Profesional. Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
+    // --- LÓGICA DEL MENÚ DESPLEGABLE ---
+    const menuBtn = document.getElementById('mainMenuBtn');
+    const dropdownMenu = document.getElementById('dropdownMenu');
+
+    menuBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      dropdownMenu.classList.toggle('show');
+    });
+
+    document.addEventListener('click', () => {
+      dropdownMenu.classList.remove('show');
+    });
+
+    // --- LÓGICA DE DESBLOQUEO CON CLAVE ---
+    const unlockBtn = document.getElementById('unlockBtn');
+    const authOverlay = document.getElementById('authOverlay');
+    const errorMsg = document.getElementById('errorMsg');
+
+    unlock
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ALFANET | Desarrollo Web Profesional</title>
+  
+  <!-- FUENTES -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-dark: #0b0f19;
+      --bg-card: #131a29;
+      --bg-card-hover: #1c263b;
+      --accent-cyan: #00f2fe;
+      --accent-blue: #4facfe;
+      --accent-green: #25d366;
+      --text-main: #f0f4f8;
+      --text-muted: #94a3b8;
+      --border: rgba(255, 255, 255, 0.08);
+      --danger: #ff4b4b;
+      --glow: 0 0 20px rgba(0, 242, 254, 0.25);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* HEADER & NAV */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(11, 15, 25, 0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.5rem;
+    }
+
+    .logo-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .logo-img {
+      width: 45px;
+      height: 45px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 2px solid var(--accent-cyan);
+    }
+
+    .brand-name {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: #ffffff;
+    }
+
+    /* DROPDOWN MENU */
+    .menu-container {
+      position: relative;
+    }
+
+    .menu-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s;
+    }
+
+    .menu-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--accent-cyan);
+      box-shadow: var(--glow);
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 120%;
+      width: 320px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+      padding: 1rem;
+      z-index: 1001;
+    }
+
+    .dropdown-content.show {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .menu-item {
+      display: block;
+      padding: 0.8rem;
+      color: var(--text-main);
+      text-decoration: none;
+      border-radius: 8px;
+      margin-bottom: 0.5rem;
+      transition: background 0.2s;
+    }
+
+    .menu-item:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .menu-item-title {
+      font-weight: 700;
+      color: var(--accent-cyan);
+      display: block;
+      font-size: 0.95rem;
+    }
+
+    .menu-item-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* HERO SECTION */
+    .hero {
+      max-width: 1200px;
+      margin: 4rem auto;
+      padding: 0 1.5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      background: rgba(0, 242, 254, 0.1);
+      color: var(--accent-cyan);
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      border: 1px solid rgba(0, 242, 254, 0.2);
+    }
+
+    .hero-title {
+      font-size: 2.8rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-title span {
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-desc {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--accent-green);
+      color: #000;
+      font-weight: 700;
+      padding: 1rem 2rem;
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: 1.1rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 10px 20px rgba(37, 211, 102, 0.2);
+    }
+
+    .hero-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 30px rgba(37, 211, 102, 0.4);
+    }
+
+    .hero-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 2.5rem;
+      position: relative;
+      box-shadow: var(--glow);
+    }
+
+    .feature-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      font-size: 1rem;
+    }
+
+    .feature-icon {
+      color: var(--accent-cyan);
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    /* PROCESS SECTION */
+    .section {
+      max-width: 1200px;
+      margin: 6rem auto;
+      padding: 0 1.5rem;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin-bottom: 3rem;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .step-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      text-align: center;
+      position: relative;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+
+    .step-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent-cyan);
+    }
+
+    .step-number {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 3rem;
+      font-weight: 900;
+      color: rgba(255, 255, 255, 0.05);
+      position: absolute;
+      top: 15px;
+      right: 20px;
+    }
+
+    .step-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin: 1rem 0 0.5rem 0;
+      color: var(--accent-cyan);
+    }
+
+    .step-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* PORTFOLIO SHOWCASE */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .portfolio-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .portfolio-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--glow);
+    }
+
+    .portfolio-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      background: #1e293b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+    }
+
+    .portfolio-content {
+      padding: 1.5rem;
+    }
+
+    .portfolio-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .portfolio-desc {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    /* CALCULATOR SECTION */
+    .calculator-container {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 2.5rem;
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      min-height: 250px;
+    }
+
+    .auth-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(19, 26, 41, 0.98);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      padding: 2rem;
+      text-align: center;
+      transition: opacity 0.4s ease, visibility 0.4s;
+    }
+
+    .auth-overlay.unlocked {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .auth-btn {
+      background: var(--accent-cyan);
+      color: #000;
+      font-size: 1.8rem;
+      width: 75px;
+      height: 75px;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 25px rgba(0, 242, 254, 0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .auth-btn:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 35px rgba(0, 242, 254, 0.7);
+    }
+
+    .error-msg {
+      color: var(--danger);
+      font-size: 0.9rem;
+      margin-top: 1rem;
+      display: none;
+      font-weight: 600;
+    }
+
+    .calc-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .calc-row {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      padding: 1rem 1.2rem;
+      border-radius: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .counter-control {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(0,0,0,0.4);
+      padding: 0.4rem 0.8rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+
+    .count-btn {
+      background: rgba(255,255,255,0.1);
+      border: none;
+      color: #fff;
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+
+    .count-btn:hover {
+      background: var(--accent-cyan);
+      color: #000;
+    }
+
+    .calc-toggle {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      user-select: none;
+      width: 100%;
+    }
+
+    .calc-toggle.selected .checkbox-custom {
+      background: var(--accent-cyan);
+      border-color: var(--accent-cyan);
+    }
+
+    .calc-toggle.selected .checkbox-custom::after {
+      content: '✓';
+      color: #000;
+      font-weight: bold;
+      font-size: 13px;
+    }
+
+    .checkbox-custom {
+      width: 22px;
+      height: 22px;
+      border: 2px solid var(--text-muted);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+
+    .calc-summary {
+      background: rgba(0,0,0,0.4);
+      padding: 1.5rem;
+      border-radius: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+      border: 1px solid var(--border);
+    }
+
+    .price-display {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--accent-cyan);
+    }
+
+    /* FAQ ACCORDION */
+    .faq-container {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .faq-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .faq-question {
+      width: 100%;
+      padding: 1.2rem;
+      background: none;
+      border: none;
+      color: var(--text-main);
+      font-weight: 700;
+      font-size: 1rem;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      padding: 0 1.2rem;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+    }
+
+    .faq-item.active .faq-answer {
+      max-height: 200px;
+      padding: 0 1.2rem 1.2rem 1.2rem;
+    }
+
+    /* FLOATING WHATSAPP BUTTON */
+    .float-wa {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background: var(--accent-green);
+      color: white;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+      z-index: 999;
+      transition: transform 0.3s;
+    }
+
+    .float-wa:hover {
+      transform: scale(1.1);
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 3rem 1.5rem;
+      text-align: center;
+      color: var(--text-muted);
+      margin-top: 4rem;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .hero-title {
+        font-size: 2.2rem;
+      }
+      .calc-summary {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header>
+    <div class="nav-container">
+      <a href="#" class="logo-brand">
+        <img src="ALFANET.png" alt="Logo de ALFANET" class="logo-img" onerror="this.src='https://via.placeholder.com/45/00f2fe/000000?text=A'">
+        <span class="brand-name">ALFANET</span>
+      </a>
+
+      <div class="menu-container">
+        <button class="menu-btn" id="mainMenuBtn">
+          Menú Interactivo ▾
+        </button>
+        <div class="dropdown-content" id="dropdownMenu">
+          <a href="#hero" class="menu-item">
+            <span class="menu-item-title">Inicio & Beneficios</span>
+            <span class="menu-item-desc">Descubrí lo que incluye tu sitio web profesional.</span>
+          </a>
+          <a href="#pasos" class="menu-item">
+            <span class="menu-item-title">¿Cómo Funciona?</span>
+            <span class="menu-item-desc">Obtené tu página web en tan solo 3 sencillos pasos.</span>
+          </a>
+          <a href="#proyectos" class="menu-item">
+            <span class="menu-item-title">Trabajos Realizados</span>
+            <span class="menu-item-desc">Echá un vistazo a nuestros diseños.</span>
+          </a>
+          <a href="#cotizador" class="menu-item">
+            <span class="menu-item-title">Cotizador Interactivo</span>
+            <span class="menu-item-desc">Calculá el presupuesto a tu medida.</span>
+          </a>
+          <a href="#faq" class="menu-item">
+            <span class="menu-item-title">Preguntas Frecuentes</span>
+            <span class="menu-item-desc">Resolvé todas tus dudas al instante.</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero" id="hero">
+    <div>
+      <span class="hero-tag">⚡ PÁGINA LISTA EN SOLO 3 DÍAS</span>
+      <h1 class="hero-title">¿Querés potenciar tu negocio? Llevalo al <span>Siguiente Nivel</span></h1>
+      <p class="hero-desc">En ALFANET creamos sitios web modernos, veloces y totalmente optimizados para convertir visitantes en clientes desde celulares y computadoras.</p>
+      <a href="https://wa.me/5493417453769?text=Hola%20ALFANET,%20quiero%20consultar%20por%20mi%20p%C3%A1gina%20web" target="_blank" class="hero-cta">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.51 1.019 3.529l-.696 2.54 2.599-.681c.971.529 2.083.824 3.251.824 3.182 0 5.768-2.586 5.768-5.766 0-3.18-2.586-5.764-5.769-5.764zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793 0-.852.448-1.271.607-1.445.159-.173.346-.217.462-.217.115 0 .231.001.332.006.109.005.253-.041.396.303.145.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.173.086.275.072.376-.043.101-.115.433-.506.549-.679.116-.173.231-.145.39-.087.159.058 1.011.477 1.184.564.173.087.289.13.332.202.043.073.043.419-.101.824z"/></svg>
+        ¡Consultá Gratis Hoy!
+      </a>
+    </div>
+
+    <div class="hero-card">
+      <h3 style="margin-bottom: 1.5rem; font-size: 1.3rem;">¿Qué incluye tu sitio web?</h3>
+      <ul class="feature-list">
+        <li class="feature-item">
+          <span class="feature-icon">✓</span>
+          <span>Diseño 100% Adaptado a Celulares y Computadoras.</span>
+        </li>
+        <li class="feature-item">
+          <span class="feature-icon">✓</span>
+          <span>Botón Directo a tu WhatsApp para consultas al instante.</span>
+        </li>
+        <li class="feature-item">
+          <span class="feature-icon">✓</span>
+          <span>Ubicación Interactiva de Google Maps Integrada.</span>
+        </li>
+        <li class="feature-item">
+          <span class="feature-icon">✓</span>
+          <span>Sitio Seguro (SSL), Rápido y Optimizado para buscadores.</span>
+        </li>
+        <li class="feature-item">
+          <span class="feature-icon">✓</span>
+          <span>Un solo pago accesible sin mensualidades ocultas.</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- PROCESS SECTION -->
+  <section class="section" id="pasos">
+    <h2 class="section-title">Tu Página Web en solo <span style="color: var(--accent-cyan);">3 Pasos</span></h2>
+    <div class="steps-grid">
+      <div class="step-card">
+        <span class="step-number">01</span>
+        <h3 class="step-title">1. Envianos un WhatsApp</h3>
+        <p class="step-desc">Ponete en contacto con nosotros para iniciar la conversación de forma rápida y sin compromiso.</p>
+      </div>
+      <div class="step-card">
+        <span class="step-number">02</span>
+        <h3 class="step-title">2. Compartí tu Idea</h3>
+        <p class="step-desc">Envianos tus imágenes, referencias o simplemente explicanos brevemente qué querés lograr.</p>
+      </div>
+      <div class="step-card">
+        <span class="step-number">03</span>
+        <h3 class="step-title">3. Recibí tu Sitio Listo</h3>
+        <p class="step-desc">En solo 3 días tenés tu página online, probada y lista para atraer nuevos clientes.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN MUESTRA DE PROYECTOS -->
+  <section class="section" id="proyectos">
+    <h2 class="section-title">Proyectos y <span style="color: var(--accent-cyan);">Estilos</span></h2>
+    <div class="portfolio-grid">
+      <div class="portfolio-card">
+        <div class="portfolio-img">💻 Landing Page Comercial</div>
+        <div class="portfolio-content">
+          <h3 class="portfolio-title">Sitio para Negocios y Servicios</h3>
+          <p class="portfolio-desc">Enfocado en captar consultas directas a WhatsApp y presentar servicios con máxima claridad.</p>
+        </div>
+      </div>
+      <div class="portfolio-card">
+        <div class="portfolio-img">📱 Menú & Catálogo Digital</div>
+        <div class="portfolio-content">
+          <h3 class="portfolio-title">Catálogos Interactivos</h3>
+          <p class="portfolio-desc">Ideal para gastronómicos y locales que requieren mostrar productos organizados en celular.</p>
+        </div>
+      </div>
+      <div class="portfolio-card">
+        <div class="portfolio-img">🚀 Sitios Institucionales</div>
+        <div class="portfolio-content">
+          <h3 class="portfolio-title">Presencia Marcaria Profesional</h3>
+          <p class="portfolio-desc">Diseños corporativos, elegantes y optimizados para transmitir confianza absoluta a tus clientes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CALCULATOR SECTION -->
+  <section class="section" id="cotizador">
+    <h2 class="section-title">Cotizador <span style="color: var(--accent-cyan);">Interactivo</span></h2>
+    <div class="calculator-container">
+      
+      <!-- AUTH OVERLAY -->
+      <div class="auth-overlay" id="authOverlay">
+        <button class="auth-btn" id="unlockBtn" title="Ingresar clave">🔒</button>
+        <span class="error-msg" id="errorMsg">⚠️ Clave incorrecta. Intentá de nuevo.</span>
+      </div>
+
+      <p style="color: var(--text-muted); margin-bottom: 1rem;">Personalizá las cantidades y funciones según lo que necesite tu proyecto:</p>
+
+      <div class="calc-list">
+        <!-- PÁGINAS -->
+        <div class="calc-row">
+          <div>
+            <strong style="display:block;">Páginas / Secciones Web</strong>
+            <span style="color: var(--text-muted); font-size: 0.85rem;">$15.000 ARS por página</span>
+          </div>
+          <div class="counter-control">
+            <button class="count-btn" id="btn-pages-minus">-</button>
+            <span id="count-pages" style="font-weight: bold; min-width: 20px; text-align: center;">1</span>
+            <button class="count-btn" id="btn-pages-plus">+</button>
+          </div>
+        </div>
+
+        <!-- IMÁGENES -->
+        <div class="calc-row">
+          <div>
+            <strong style="display:block;">Imágenes / Fotos optimizadas</strong>
+            <span style="color: var(--text-muted); font-size: 0.85rem;">$5.000 ARS por imagen</span>
+          </div>
+          <div class="counter-control">
+            <button class="count-btn" id="btn-images-minus">-</button>
+            <span id="count-images" style="font-weight: bold; min-width: 20px; text-align: center;">3</span>
+            <button class="count-btn" id="btn-images-plus">+</button>
+          </div>
+        </div>
+
+        <!-- FORMULARIO DE CONTACTO -->
+        <div class="calc-row">
+          <div class="calc-toggle selected" id="toggle-form">
+            <div class="checkbox-custom"></div>
+            <div>
+              <strong style="display:block;">Formulario de Contacto / Consultas</strong>
+              <span style="color: var(--text-muted); font-size: 0.85rem;">+$10.000 ARS</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- BOTÓN DE WHATSAPP -->
+        <div class="calc-row">
+          <div class="calc-toggle selected" id="toggle-wa">
+            <div class="checkbox-custom"></div>
+            <div>
+              <strong style="display:block;">Botón Flotante de WhatsApp Directo</strong>
+              <span style="color: var(--text-muted); font-size: 0.85rem;">+$5.000 ARS</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- BOTÓN FLOTANTE DE GOOGLE MAPS DIRECTO -->
+        <div class="calc-row">
+          <div class="calc-toggle selected" id="toggle-maps">
+            <div class="checkbox-custom"></div>
+            <div>
+              <strong style="display:block;">Mapa Interactivo de Google Maps</strong>
+              <span style="color: var(--text-muted); font-size: 0.85rem;">+$5.000 ARS</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="calc-summary">
+        <div>
+          <span style="color: var(--text-muted); font-size: 0.9rem; display: block;">Presupuesto Estimado:</span>
+          <div class="price-display" id="totalPrice">$50.000 ARS</div>
+        </div>
+        <a href="#" id="sendQuoteBtn" target="_blank" class="hero-cta" style="padding: 0.8rem 1.5rem; font-size: 1rem;">
+          Enviar Presupuesto por WhatsApp
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FAQ SECTION -->
+  <section class="section" id="faq">
+    <h2 class="section-title">Preguntas <span style="color: var(--accent-cyan);">Frecuentes</span></h2>
+    <div class="faq-container">
+      <div class="faq-item">
+        <button class="faq-question">
+          <span>¿Hay algún costo mensual o recurrente?</span>
+          <span>+</span>
+        </button>
+        <div class="faq-answer">
+          No. Ofrecemos el desarrollo por un pago único. El dominio y el hosting se abonan anualmente según las necesidades de tu sitio.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          <span>¿Cuánto tiempo tarda realmente en estar lista?</span>
+          <span>+</span>
+        </button>
+        <div class="faq-answer">
+          Una vez que nos envíes la información básica (imágenes, textos o la idea general), entregamos tu sitio funcional en un plazo estimado de 3 días.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          <span>¿Funciona bien en celulares?</span>
+          <span>+</span>
+        </button>
+        <div class="faq-answer">
+          ¡Totalmente! Todos nuestros desarrollos son 100% responsivos y se adaptan a smartphones, tablets y computadoras de escritorio.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FLOATING WHATSAPP BUTTON -->
+  <a href="https://wa.me/5493417453769?text=Hola%20ALFANET,%20tengo%20una%20consulta" target="_blank" class="float-wa" title="Hablar con un asesor">
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.51 1.019 3.529l-.696 2.54 2.599-.681c.971.529 2.083.824 3.251.824 3.182 0 5.768-2.586 5.768-5.766 0-3.18-2.586-5.764-5.769-5.764zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793 0-.852.448-1.271.607-1.445.159-.173.346-.217.462-.217.115 0 .231.001.332.006.109.005.253-.041.396.303.145.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.173.086.275.072.376-.043.101-.115.433-.506.549-.679.116-.173.231-.145.39-.087.159.058 1.011.477 1.184.564.173.087.289.13.332.202.043.073.043.419-.101.824z"/></svg>
+  </a>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2026 ALFANET. Desarrollo Web Profesional. Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
+    // --- LÓGICA DEL MENÚ DESPLEGABLE ---
+    const menuBtn = document.getElementById('mainMenuBtn');
+    const dropdownMenu = document.getElementById('dropdownMenu');
+
+    menuBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      dropdownMenu.classList.toggle('show');
+    });
+
+    document.addEventListener('click', () => {
+      dropdownMenu.classList.remove('show');
+    });
+
+    // --- LÓGICA DE DESBLOQUEO CON CLAVE ---
+    const unlockBtn = document.getElementById('unlockBtn');
+    const authOverlay = document.getElementById('authOverlay');
+    const errorMsg = document.getElementById('errorMsg');
+
+    unlock
